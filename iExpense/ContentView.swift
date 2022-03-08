@@ -7,14 +7,21 @@
 
 import SwiftUI
 
+struct User: Codable {
+    let firstName : String
+    let lastName : String
+}
+
 struct ContentView: View {
-    //monitored and works just like @State
-    //@AppStorage works just like UserDefault but more complex when it comes to larger data types
-    @AppStorage("tapCount") private var tapCount = 0
-    
+    @State private var user = User(firstName: "Tide", lastName: "Poole")
     var body: some View {
-        Button("Tap Count: \(tapCount)") {
-            tapCount += 1
+        Button("Save User"){
+            //use JSONDecoder when trying to convert json data to Swift codable type
+            let encoder = JSONEncoder()
+            //data is a Data datatype designed to store any data
+            if let data = try? encoder.encode(user){
+                UserDefaults.standard.set(data, forKey: "UserData")
+            }
         }
     }
 }
