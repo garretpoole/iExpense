@@ -7,14 +7,16 @@
 
 import SwiftUI
 //must use class over structs if data is between multiple views
-class User{
-    var firstname = "Bilbo"
-    var lastname = "Baggins"
+class User : ObservableObject {
+    @Published var firstname = "Bilbo"
+    @Published var lastname = "Baggins"
 }
 
 struct ContentView: View {
-    //@state doesnt see change bc it doesnt watch value inside class (just class itself)
-    @State private var user = User()
+    //@State is for local struct changes only
+    //@StateObject is for any change announcements
+    //once created with @StateObject, use @ObservedObject everywhere else
+    @StateObject var user = User()
     
     var body: some View {
         VStack{
