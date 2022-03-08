@@ -6,23 +6,28 @@
 //
 
 import SwiftUI
-//must use class over structs if data is between multiple views
-class User : ObservableObject {
-    @Published var firstname = "Bilbo"
-    @Published var lastname = "Baggins"
+
+struct SecondView: View{
+    @Environment(\.dismiss) var dismiss
+    
+    let name: String
+    var body : some View {
+        Text("Hello , \(name)!")
+        Button("Dismiss") {
+            dismiss()
+        }
+    }
 }
 
 struct ContentView: View {
-    //@State is for local struct changes only
-    //@StateObject is for any change announcements
-    //once created with @StateObject, use @ObservedObject everywhere else
-    @StateObject var user = User()
+    @State private var showingSheet = false
     
     var body: some View {
-        VStack{
-            Text("Your name is \(user.firstname) \(user.lastname)")
-            TextField("First Name", text: $user.firstname)
-            TextField("Last Name", text: $user.lastname)
+        Button("Show Sheet"){
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "Tide")
         }
     }
 }
