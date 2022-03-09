@@ -7,7 +7,7 @@
 
 import Foundation
 //for identifiable, need id prop with UUID()
-struct ExpenseItem: Identifiable {
+struct ExpenseItem: Identifiable, Codable {
     let id = UUID()
     let name: String
     let type: String
