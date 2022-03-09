@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var expenses = Expenses()
     @State private var showingAddExpense = false
+    @State private var amountColor = Color.green
     
     var dollarFormat: FloatingPointFormatStyle<Double>.Currency{
         //Locale is struct that gets area of user from iOS settings
@@ -30,6 +31,7 @@ struct ContentView: View {
                         }
                         Spacer()
                         Text(item.amount, format: dollarFormat)
+                            .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
                     }
                 }
                 .onDelete(perform: removeItems)
