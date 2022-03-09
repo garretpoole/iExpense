@@ -6,8 +6,9 @@
 //
 
 import Foundation
-
-struct ExpenseItem {
+//for idnetifiable, need id prop with UUID()
+struct ExpenseItem: Identifiable {
+    let id = UUID()
     let name: String
     let type: String
     let amount: Double

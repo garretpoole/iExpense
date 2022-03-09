@@ -14,7 +14,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List{
-                ForEach(expenses.items, id: \.name) { item in
+                //no longer need to state id bc item is identifiable
+                ForEach(expenses.items) { item in
                     Text(item.name)
                 }
                 .onDelete(perform: removeItems)
