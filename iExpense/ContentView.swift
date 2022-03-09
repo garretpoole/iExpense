@@ -12,11 +12,25 @@ struct ContentView: View {
     @StateObject var expenses = Expenses()
     @State private var showingAddExpense = false
     
+    var dollarFormat: FloatingPointFormatStyle<Double>.Currency{
+        //Locale is struct that gets area of user from iOS settings
+        let currencyCode = Locale.current.currencyCode ?? "USD"
+        return FloatingPointFormatStyle<Double>.Currency(code: currencyCode)
+    }
+    
     var body: some View {
         NavigationView{
             List{
                 ForEach(expenses.items) { item in
-                    Text(item.name)
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+                        Spacer()
+                        Text(item.amount, format: dollarFormat)
+                    }
                 }
                 .onDelete(perform: removeItems)
             }
