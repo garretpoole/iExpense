@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var expenses = Expenses()
+    
     @State private var showingAddExpense = false
     @State private var amountColor = Color.green
     
@@ -22,19 +23,36 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             List{
-                ForEach(expenses.items) { item in
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
-                        }
-                        Spacer()
-                        Text(item.amount, format: dollarFormat)
-                            .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
+                Section("Personal"){
+                    ForEach(expenses.personalExpenses) { item in
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                Spacer()
+                                Text(item.amount, format: dollarFormat)
+                                    .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
+                            }
                     }
+                    .onDelete(perform: removeItems)
                 }
-                .onDelete(perform: removeItems)
+                Section("Business"){
+                    ForEach(expenses.businessExpenses) { item in
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                Spacer()
+                                Text(item.amount, format: dollarFormat)
+                                    .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
+                            }
+                    }
+                    .onDelete(perform: removeItems)
+                }
             }
             .navigationTitle("iExpense")
             .toolbar {
