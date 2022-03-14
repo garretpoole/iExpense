@@ -29,7 +29,7 @@ struct ContentView: View {
                                 VStack(alignment: .leading){
                                     Text(item.name)
                                         .font(.headline)
-                                    Text(item.type)
+                                    Text(item.description)
                                 }
                                 Spacer()
                                 Text(item.amount, format: dollarFormat)
@@ -44,7 +44,7 @@ struct ContentView: View {
                                 VStack(alignment: .leading){
                                     Text(item.name)
                                         .font(.headline)
-                                    Text(item.type)
+                                    Text(item.description)
                                 }
                                 Spacer()
                                 Text(item.amount, format: dollarFormat)
