@@ -35,6 +35,9 @@ struct ContentView: View {
                                 Text(item.amount, format: dollarFormat)
                                     .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel("\(item.name) for \(item.amount) dollars")
+                            .accessibilityHint("Personal")
                     }
                     .onDelete(perform: removeItems)
                 }
@@ -50,6 +53,9 @@ struct ContentView: View {
                                 Text(item.amount, format: dollarFormat)
                                     .foregroundColor(item.amount > 100 ? Color.red : (item.amount > 10 ? Color.orange: Color.green))
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel("\(item.name) for \(item.amount) dollars")
+                            .accessibilityHint("Business")
                     }
                     .onDelete(perform: removeItems)
                 }
